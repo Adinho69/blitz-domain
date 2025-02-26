@@ -2,6 +2,7 @@ package com.adinhpo.anime.entitys;
 
 import com.adinhpo.anime.enums.StatusTemporada;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -29,9 +30,15 @@ public class Temporada {
                 UUID.randomUUID().toString(),
                 idReferencia, indice,
                 temporadaAnterior,
-                List.of(),
+                new ArrayList<>(),
                 StatusTemporada.AGUARDANDO
         );
+    }
+
+    public static Temporada pegar(
+            String id, Integer indice, Long idReferencia, Temporada temporadaAnterior, List<Episodio> episodios, StatusTemporada status
+    ) {
+        return new Temporada(id, idReferencia, indice, temporadaAnterior, episodios, status);
     }
 
     private void validate() {
