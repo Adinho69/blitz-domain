@@ -95,6 +95,10 @@ public class Temporada {
         return imagens;
     }
 
+    public List<Episodio> episodios() {
+        return episodios;
+    }
+
     public void adicionarEpisodio(final Episodio episodio) {
         this.episodios.add(Objects.requireNonNull(episodio));
     }
