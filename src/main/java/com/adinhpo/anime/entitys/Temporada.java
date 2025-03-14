@@ -1,6 +1,7 @@
 package com.adinhpo.anime.entitys;
 
 import com.adinhpo.anime.enums.StatusTemporada;
+import com.adinhpo.anime.valueObjects.Images;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,31 +15,43 @@ public class Temporada {
     private Integer indice;
     private final List<Episodio> episodios;
     private StatusTemporada status;
+    private List<String> titulos;
+    private Images imagens;
 
-    private Temporada(String id, Long idReferencia, Integer indice, Temporada temporadaAnterior, List<Episodio> episodios, StatusTemporada status) {
+    private Temporada(String id, Long idReferencia, Integer indice, List<String> titulos, Temporada temporadaAnterior, List<Episodio> episodios, StatusTemporada status, Images imagens) {
         this.id = Objects.requireNonNull(id);
         this.idReferencia = Objects.requireNonNull(idReferencia);
         this.temporadaAnterior = temporadaAnterior;
         this.indice = Objects.requireNonNull(indice);
         this.episodios = Objects.requireNonNull(episodios);
+        this.titulos = titulos;
+        this.imagens = imagens;
         this.validate();
         this.changeStatus(status);
     }
 
-    public static Temporada criar(Integer indice, Long idReferencia, Temporada temporadaAnterior) {
+    public static Temporada criar(Integer indice, Long idReferencia, Temporada temporadaAnterior, Images imagens) {
         return new Temporada(
                 UUID.randomUUID().toString(),
                 idReferencia, indice,
+                new ArrayList<>(),
                 temporadaAnterior,
                 new ArrayList<>(),
-                StatusTemporada.AGUARDANDO
-        );
+                StatusTemporada.AGUARDANDO,
+                imagens);
     }
 
     public static Temporada pegar(
-            String id, Integer indice, Long idReferencia, Temporada temporadaAnterior, List<Episodio> episodios, StatusTemporada status
+            String id,
+            Integer indice,
+            Long idReferencia,
+            List<String> titulos,
+            Temporada temporadaAnterior,
+            List<Episodio> episodios,
+            StatusTemporada status,
+            Images imagens
     ) {
-        return new Temporada(id, idReferencia, indice, temporadaAnterior, episodios, status);
+        return new Temporada(id, idReferencia, indice, titulos, temporadaAnterior, episodios, status, imagens);
     }
 
     private void validate() {
@@ -74,12 +87,25 @@ public class Temporada {
         return status;
     }
 
+    public List<String> titulos() {
+        return titulos;
+    }
+
+    public Images imagens() {
+        return imagens;
+    }
+
     public void adicionarEpisodio(final Episodio episodio) {
         this.episodios.add(Objects.requireNonNull(episodio));
     }
 
     public void changeStatus(StatusTemporada status) {
         this.status = status;
+    }
+
+    public Temporada adicionarTitulo(String titulo) {
+        this.titulos.add(Objects.requireNonNull(titulo));
+        return this;
     }
 
     @Override
