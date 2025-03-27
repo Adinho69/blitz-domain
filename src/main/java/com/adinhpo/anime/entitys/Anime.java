@@ -141,6 +141,10 @@ public class Anime {
         this.imagens = Objects.requireNonNull(imagens);
     }
 
+    public void iniciarLancamento(){
+        this.emLancamento = true;
+    }
+
     private void validate() {
         if (this.id.isEmpty() || this.id.isBlank()) {
             throw new IllegalArgumentException("Id não pode ser vazio");

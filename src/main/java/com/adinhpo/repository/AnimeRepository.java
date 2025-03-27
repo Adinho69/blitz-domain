@@ -12,4 +12,9 @@ public interface AnimeRepository {
     Anime salvar(Anime anime);
     void adicionarGenero(Anime anime, Set<Genero> genero);
     Anime adicionarTemporadas(Anime anime, List<Temporada> temporadas);
+    Anime atualizar(Anime anime);
+    Anime pegarPorID(String id);
+    Anime pegarPorIDTemporada(String idTemporada);
+    Anime atualizarAnime(Anime anime);
+    Anime animeJaExistePorTemporada(Long temporadaID);
 }
