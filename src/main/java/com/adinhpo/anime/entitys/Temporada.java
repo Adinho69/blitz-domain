@@ -13,7 +13,7 @@ public class Temporada {
     private Long idReferencia;
     private Temporada temporadaAnterior;
     private Integer indice;
-    private final List<Episodio> episodios;
+    private List<Episodio> episodios;
     private StatusTemporada status;
     private List<String> titulos;
     private Images imagens;
@@ -109,6 +109,10 @@ public class Temporada {
 
     public Temporada adicionarTitulo(String titulo) {
         this.titulos.add(Objects.requireNonNull(titulo));
+        return this;
+    }
+    public Temporada zerarEpisodios(){
+        this.episodios = new ArrayList<>();
         return this;
     }
 
